@@ -1,0 +1,198 @@
+<!-- src/app/components/step-progressor/step-progressor.component.html -->
+
+<div class="step-progressor">
+    <!-- Step indicator component -->
+    <app-step-indicator [currentStep]="currentStep"></app-step-indicator>
+    
+    <div class="form-container">
+      <!-- Step 1: Issue Selection -->
+      <div *ngIf="currentStep === 1" class="step-content fade-in">
+        <h2>Select Your Legal Issue</h2>
+        <p>You may choose multiple legal issues that best describe your current needs.</p>
+        
+        <form [formGroup]="issueSelectionForm">
+          <div class="issue-selection-container">
+            <div *ngFor="let issue of issueTypes" class="issue-option">
+              <label class="form-check-label-wrapper" [for]="'issue-' + issue">
+                <input type="checkbox"
+                       class="form-check-input"
+                       [value]="issue"
+                       [formControlName]="issue"
+                       id="issue-{{issue}}"
+                       (change)="toggleSelectedClass($event, issue)">
+                <span class="issue-label-text">{{ issue }}</span>
+              </label>
+            </div>
+          </div>
+        
+          <!-- "Other" issue textarea -->
+          <div *ngIf="issueSelectionForm.get('Other')?.value" class="mb-4 fade-in">
+            <textarea class="form-control"
+                      id="otherIssueDetails"
+                      rows="4"
+                      formControlName="otherIssueDetails"
+                      placeholder="Please describe your other legal issue..."></textarea>
+            <div *ngIf="showOtherDetailsError()" class="error-message">
+              Please provide details for your other legal issue
+            </div>
+          </div>
+        
+          <div *ngIf="issueSelectionForm.invalid && isFormSubmitted" class="error-message selectissue">
+            Please select atleast one issue type
+          </div>
+        </form>
+        
+      </div>
+      
+      <!-- Step 2: Issue Description -->
+      <div *ngIf="currentStep === 2" class="step-content fade-in">
+        <h2>Describe Your Legal Issue</h2>
+        <p>Please provide details about your legal situation</p>
+        
+        <form [formGroup]="issueDescriptionForm">
+          <div class="mb-4">
+            <label for="issueDescription" class="form-label">Issue Description <span class="required">*</span></label>
+            <textarea class="form-control" 
+                     id="issueDescription" 
+                     rows="6" 
+                     maxlength="500"
+                     formControlName="issueDescription" 
+                     placeholder="Please describe your legal issue in detail..."></textarea>
+            <div class="character-count" [class.text-danger]="getRemainingCharacters() < 50">
+              {{getRemainingCharacters()}} characters remaining
+            </div>
+            <div *ngIf="issueDescriptionForm.get('issueDescription')?.invalid && 
+                       issueDescriptionForm.get('issueDescription')?.touched" 
+                 class="error-message issuedesc">
+              Issue description is required
+            </div>
+          </div>
+
+          <!-- New field for issue location -->
+          <div class="mb-4">
+            <label for="issueLocation" class="form-label">Issue Location (Optional)</label>
+            <textarea type="text"
+                  class="form-control"
+                  id="issueLocation"
+                  formControlName="issueLocation"
+                  placeholder="Enter the address where the issue occurred"></textarea>
+          </div>
+
+        </form>
+      </div>
+      
+     <!-- Step 3: Personal Details -->
+      <div *ngIf="currentStep === 3" class="step-content fade-in">
+        <h2>Your Information</h2>
+        <p>Please provide your contact information</p>
+
+        <form [formGroup]="personalDetailsForm">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="firstName" class="form-label">First Name <span class="required">*</span></label>
+              <input type="text"
+                    class="form-control"
+                    id="firstName"
+                    formControlName="firstName"
+                    placeholder="Enter your first name">
+              <div *ngIf="personalDetailsForm.get('firstName')?.invalid && personalDetailsForm.get('firstName')?.touched"
+                  class="error-message">
+                First name is required
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="lastName" class="form-label">Last Name <span class="required">*</span></label>
+              <input type="text"
+                    class="form-control"
+                    id="lastName"
+                    formControlName="lastName"
+                    placeholder="Enter your last name">
+              <div *ngIf="personalDetailsForm.get('lastName')?.invalid && personalDetailsForm.get('lastName')?.touched"
+                  class="error-message">
+                Last name is required
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="email" class="form-label">Email Address <span class="required">*</span></label>
+              <input type="email"
+                    class="form-control"
+                    id="email"
+                    formControlName="email"
+                    placeholder="Enter your email address">
+              <div *ngIf="personalDetailsForm.get('email')?.invalid && personalDetailsForm.get('email')?.touched"
+                  class="error-message">
+                <div *ngIf="personalDetailsForm.get('email')?.errors?.['required']">
+                  Email is required
+                </div>
+                <div *ngIf="personalDetailsForm.get('email')?.errors?.['email']">
+                  Please enter a valid email address
+                </div>
+                <div *ngIf="personalDetailsForm.get('email')?.errors?.['invalidEmail']">
+                  Please enter a valid email address.
+                </div>
+                
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="phoneNumber" class="form-label">Phone Number</label>
+              <input type="tel"
+                    class="form-control"
+                    id="phoneNumber"
+                    formControlName="phoneNumber"
+                    placeholder="Enter your phone number">
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="address" class="form-label">Address</label>
+              <input type="text"
+                    class="form-control"
+                    id="address"
+                    formControlName="address"
+                    placeholder="Enter your address">
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="zipCode" class="form-label">Zip Code </label>
+              <input type="text"
+                    class="form-control"
+                    id="zipCode"
+                    formControlName="zipCode"
+                    placeholder="Enter your zip code">
+              <!-- <div *ngIf="personalDetailsForm.get('zipCode')?.invalid && personalDetailsForm.get('zipCode')?.touched"
+                  class="error-message">
+                Zip code is required
+              </div> -->
+            </div>
+          </div>
+        </form>
+      </div>
+
+      
+      <!-- Step 4: Review and Submit -->
+      
+      <!-- Navigation buttons -->
+      <div class="button-container">
+        <button *ngIf="currentStep > 1" 
+                (click)="previousStep()" 
+                class="btn btn-outline-primary">
+          Back
+        </button>
+        
+        <button (click)="nextStep()" 
+                class="btn btn-primary" 
+                [disabled]="isSubmitting">
+          <span *ngIf="currentStep < totalSteps">Next</span>
+          <span *ngIf="currentStep === totalSteps">
+            <span *ngIf="isSubmitting">
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              Submitting...
+            </span>
+            <span *ngIf="!isSubmitting">Submit</span>
+          </span>
+        </button>
+      </div>
+    </div>
+</div>

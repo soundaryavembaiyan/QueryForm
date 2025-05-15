@@ -1,0 +1,51 @@
+/* src/app/pages/home/home.component.scss */
+.split-layout {
+    display: flex;
+    min-height: 100vh;
+    
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
+  
+  .left-panel {
+    flex: 1;
+    background-color: #1e40af; /* Blue background */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    
+    .content {
+      max-width: 400px;
+      text-align: center;
+      
+      h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+      }
+      
+      p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+    }
+  }
+  
+  .right-panel {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background-color: #f8fafc;
+    
+    .qr-container {
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+    }
+  }

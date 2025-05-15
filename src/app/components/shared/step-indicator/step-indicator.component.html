@@ -1,0 +1,21 @@
+<!-- src/app/components/shared/step-indicator/step-indicator.component.html -->
+<div class="step-indicator">
+    <div class="steps-container">
+      <div class="progress-bar">
+        <div class="progress" [style.width]="((currentStep-1) / (steps.length-1)) * 100 + '%'"></div>
+      </div>
+      
+      <div class="steps">
+        <div *ngFor="let step of steps; let i = index" 
+             class="step-item" 
+             [class.active]="i+1 <= currentStep" 
+             [class.completed]="i+1 < currentStep">
+          <div class="step-circle">
+            <span *ngIf="i+1 < currentStep">✓</span>
+            <span *ngIf="i+1 >= currentStep">{{i+1}}</span>
+          </div>
+          <div class="step-label">{{step}}</div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,28 @@
+<!-- src/app/pages/inquiry-form/inquiry-form.component.html -->
+<!-- Show split layout only if UID is valid -->
+<div class="split-layout" *ngIf="isValidUid">
+  <!-- Left side with blue background and text -->
+  <div class="left-panel">
+    <div class="content">
+      <h1>Find the Lawyer</h1>
+      <p>Tell us about your legal needs so we can help you find the right professional</p>
+      <div class="support-info">
+        <!-- <h3>Need Help?</h3> -->
+        <!-- <p>Call us at: <strong>1-800-LEGAL-AID</strong></p> -->
+        <!-- <p>Email: <strong>supportfindthelawyer.com</strong></p> -->
+      </div>
+    </div>
+  </div>
+  
+  <!-- Right side with step progressor form -->
+  <div class="right-panel">
+    <app-step-progressor></app-step-progressor>
+  </div>
+</div>
+
+<!-- Show not found message if UID is invalid -->
+<div class="not-found-container" *ngIf="!isValidUid">
+<img src="assets/3793096.jpg" alt="Page Not Found" class="not-found-image">
+<h2>Oops! Page Not Found</h2>
+<p>The page you're looking for wasn't found. Please scan the QR code again to proceed.</p>
+</div>

@@ -1,0 +1,235 @@
+/* confirm-dialog.component.scss */
+.dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .dialog-box {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+    overflow: hidden;
+  }
+  
+  .dialog-content {
+    padding: 20px;
+    
+    h3 {
+      margin-top: 0;
+      color: #333;
+    }
+    
+    p {
+      color: #666;
+      margin-bottom: 0;
+    }
+  }
+  
+  .dialog-actions {
+    display: flex;
+    padding: 15px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #eee;
+    
+    button {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      
+      &.cancel-btn {
+        background-color: #f44336;
+        color: white;
+        margin-right: 10px;
+        
+        &:hover {
+          background-color: #d32f2f;
+        }
+      }
+      
+      &.confirm-btn {
+        background-color: #2980b9;
+        color: white;
+        
+        &:hover {
+          background-color: #2980b9;
+        }
+      }
+    }
+  }
+
+    /* Enhanced confirm-dialog.component.scss */
+    .dialog-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+      
+      .dialog-box {
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        width: 90%;
+        max-width: 400px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+      
+      .dialog-content {
+        padding: 24px 20px;
+        
+        h3 {
+          margin-top: 0;
+          color: #1e293b;
+          font-size: 1.3rem;
+          font-weight: 600;
+          margin-bottom: 12px;
+        }
+        
+        p {
+          color: #64748b;
+          margin-bottom: 0;
+          line-height: 1.6;
+          font-size: 1rem;
+        }
+      }
+      
+      .dialog-actions {
+        display: flex;
+        padding: 20px;
+        background-color: #f8fafc;
+        border-top: 1px solid #e2e8f0;
+        
+        button {
+          flex: 1;
+          padding: 12px;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          font-size: 1rem;
+          font-weight: 500;
+          transition: all 0.25s ease;
+          
+          &.cancel-btn {
+            background-color: #f1f5f9;
+            color: #64748b;
+            margin-right: 12px;
+            border: 1px solid #cbd5e1;
+            
+            &:hover {
+              background-color: #e2e8f0;
+              color: #334155;
+            }
+            
+            &:active {
+              transform: translateY(1px);
+            }
+          }
+          
+          &.confirm-btn {
+            background-color: #2980b9;
+            color: white;
+            box-shadow: 0 6px 12px rgba(52, 152, 219, 0.3);
+            
+            &:hover {
+              background-color: #2980b9;
+              transform: translateY(-2px);
+              box-shadow: 0 6px 12px rgba(52, 152, 219, 0.3);
+            }
+            
+            &:active {
+              transform: translateY(0);
+              box-shadow: 0 6px 12px rgba(52, 152, 219, 0.3);
+            }
+          }
+        }
+      }
+      
+      /* Media Queries for Responsiveness */
+      @media screen and (max-width: 768px) {
+        .dialog-box {
+          width: 95%;
+          max-width: 350px;
+        }
+        
+        .dialog-content {
+          padding: 20px 16px;
+          
+          h3 {
+            font-size: 1.2rem;
+          }
+          
+          p {
+            font-size: 0.95rem;
+          }
+        }
+        
+        .dialog-actions {
+          padding: 16px;
+          
+          button {
+            padding: 10px;
+            font-size: 0.95rem;
+          }
+        }
+      }
+      
+      @media screen and (max-width: 480px) {
+        .dialog-box {
+          width: 92%;
+          border-radius: 10px;
+        }
+        
+        .dialog-content {
+          padding: 18px 14px;
+          
+          h3 {
+            font-size: 1.1rem;
+          }
+          
+          p {
+            font-size: 0.9rem;
+          }
+        }
+        
+        .dialog-actions {
+          padding: 14px;
+          flex-direction: column;
+          gap: 10px;
+          
+          button {
+            flex: auto;
+            padding: 12px;
+            
+            &.cancel-btn {
+              margin-right: 0;
+              margin-bottom: 8px;
+              order: 2;
+            }
+            
+            &.confirm-btn {
+              order: 1;
+            }
+          }
+        }
+      }
+      

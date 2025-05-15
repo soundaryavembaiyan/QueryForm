@@ -1,0 +1,230 @@
+/* src/app/components/step-progressor/step-progressor.component.scss */
+.step-progressor {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+  
+  .form-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    /* padding: 2rem;
+    margin-top: 1.5rem; */
+    padding: 15px;
+    margin-top: 10px;
+  }
+  
+  .step-content {
+    margin-bottom: 2rem;
+    
+    h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--dark-color);
+      margin-bottom: 0.5rem;
+    }
+    
+    p {
+      color: #64748b;
+      margin-bottom: 1.5rem;
+    }
+  }
+  
+  .issue-type-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .issue-card {
+    border: 1px solid #bdc6d1;
+    border-radius: 8px;
+    padding: 1rem;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      border-color: var(--primary-color);
+      background-color: #f0f9ff;
+    }
+    
+    .form-check {
+      padding-left: 0;
+      margin-bottom: 0;
+      
+      input {
+        margin-right: 0.5rem;
+        padding:9px;
+        border-color: #bdc6d1 !important;
+      }
+    }
+  }
+  
+  .button-container {
+    display: flex;
+    /* justify-content: space-between; */
+    justify-content: flex-end;
+    gap: 15px !important;
+    margin-top: -20px;
+    
+    button {
+      min-width: 120px;
+    }
+  }
+  
+  .required {
+    color: var(--error-color);
+  }
+  
+  .error-message {
+    color: var(--error-color);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+  .selectissue{
+    margin-top: -10px !important;
+    text-align: end;
+  }
+
+  .issuedesc{
+    margin-top: -20px !important;
+  }
+  
+  .character-count {
+    font-size: 0.875rem;
+    color: #64748b;
+    text-align: right;
+    margin-top: 0.25rem;
+  }
+  
+  textarea.form-control {
+    resize: none;
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.3s ease-in;
+  }
+
+  .form-check .form-check-input {
+    float: left;
+    margin-left: -1.7em;
+}
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Additional CSS for src/app/components/step-progressor/step-progressor.component.css */
+
+.issue-selection-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.issue-option {
+  /* flex: 0 0 calc(33.333% - 1rem);
+  min-width: 200px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 50px;
+  height: 80px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease; */
+
+  flex: 0 0 auto;
+  width: 31%;
+  min-width: max-content;
+  max-width: 100%;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 50px;
+  /* height: 60px;
+  padding: 9px 15px 10px 10px; */
+  height: 50px;
+  padding: 0px 10px !important;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.issue-option:hover {
+  background-color: #f0f9ff;
+  border-color: #b2d6fe;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.custom-checkbox input[type="checkbox"] {
+  margin-right: 0.75rem;
+  width: 18px;
+  height: 18px;
+  display: none;
+  cursor: pointer;
+}
+
+.form-check-input {
+  display: none;
+}
+
+.form-check-label-wrapper {
+  align-items: flex-start;
+    padding: 10px 0px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+}
+/* 
+.form-check-label-wrapper:hover {
+  background-color: #f5f5f5;
+} */
+
+.issue-label-text {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  word-break: break-word; /* Break long words if needed */
+  white-space: normal;    /* Allow wrapping */
+  width: 100%;            /* Take full width */
+}
+
+
+.custom-checkbox label {
+  font-weight: 500;
+  color: #1e293b;
+  cursor: pointer;
+  flex: 1;
+}
+
+/* Selected state for issue options */
+.issue-option.selected {
+  background-color: #ebf5ff;
+  border-color: var(--primary-color);
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
+}
+
+/* Make the form responsive for smaller screens */
+@media (max-width: 768px) {
+  .issue-option {
+    flex: 0 0 calc(50% - 0.5rem);
+  }
+}
+
+@media (max-width: 576px) {
+  .issue-option {
+    flex: 0 0 100%;
+  }
+}

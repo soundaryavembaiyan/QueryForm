@@ -1,0 +1,110 @@
+<!-- document-dropoff.component.html -->
+<div class="document-dropoff-container" *ngIf="isValidUid && !showSuccessMessage">
+    <div class="page-header">
+      <h1>Document Sharing</h1>
+      <p class="subtitle">Securely share documents with Legal Marketplace Co.</p>
+    </div>
+
+    <div class="upload-container">
+        <h2 class="section-title">Upload Documents</h2>
+        
+        <div 
+          class="dropzone"
+          (dragover)="$event.preventDefault()"
+          (dragleave)="$event.preventDefault()"
+          (drop)="$event.preventDefault(); onFileDropped($event)"
+        >
+          <div class="file-input-wrapper">
+            <div class="upload-icon">
+              <i class="bi bi-cloud-arrow-up"></i>
+            </div>
+            <p class="upload-text">Drag and drop files here</p>
+            <p class="upload-subtext">or</p>
+            <input 
+              type="file"
+              #fileInput
+              multiple
+              (change)="fileBrowseHandler($event)"
+              style="display: none"
+            >
+            <button class="browse-btn" (click)="fileInput.click()">
+              <i class="fa fa-folder-open"></i>
+              Browse Files
+            </button>
+            <!-- <p class="file-type-info"><i class="bi bi-info-circle"></i> Max file size: 5mb</p> -->
+          </div>
+        </div>
+        
+        <div class="file-list" *ngIf="files.length > 0">
+          <h3 class="list-header">Selected Documents ({{ files.length }})</h3>
+          <div class="file-list-container">
+            <div class="file-item" *ngFor="let file of files; let i = index">
+              <div class="file-icon">
+                <i class="bi bi-file-earmark-text" [ngClass]="getFileIconClass(file)"></i>
+              </div>
+              <div class="file-details">
+                <span class="file-name">{{ file.name }}</span>
+                <span class="file-size">{{ formatFileSize(file.size) }}</span>
+              </div>
+              <button class="remove-btn" (click)="removeFile(i)" aria-label="Remove file">
+                <i class="bi bi-x-circle remBtn"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()" *ngIf="showNotes">
+          <div class="form-group">
+            <label for="notes">Add a message (Optional)</label>
+            <textarea class="addmessage"
+              id="notes" 
+              formControlName="notes" 
+              rows="4" 
+              placeholder="Add any notes or context regarding these documents..."
+            ></textarea>
+            <!-- <p class="help-text">These notes will be attached to your document submission.</p> -->
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="cancel-btn" (click)="cancelUpload()">Cancel</button>
+            <button type="submit" class="submit-btn" [disabled]="files.length === 0">
+              <i class="bi bi-send"></i>
+              Share Documents
+            </button>
+          </div>
+        </form>
+      </div>
+</div>
+    
+    <!-- Show not found message if UID is invalid -->
+<div class="not-found-container" *ngIf="!isValidUid && !showSuccessMessage">
+  <img src="assets/3793096.jpg" alt="Page Not Found" class="not-found-image">
+  <h2>Oops! Page Not Found</h2>
+  <p>The page you're looking for wasn't found. Please scan the QR code again to proceed.</p>
+</div>
+
+    <!-- Confirmation Dialogs Component -->
+    <app-confirm-dialog 
+      *ngIf="showConfirmDialog" [title]="'Confirmation'"
+      [message]="'This is a one time event and can not be undone.&nbsp;Are you sure you want to share documents with ' + firmName + '?'"
+      (decision)="confirmUpload($event)"
+    ></app-confirm-dialog>
+
+    <app-confirm-dialog 
+    *ngIf="showCancelDialog" [title]="'Alert'"
+    [message]="'Are you sure you want to remove all the selected files?'"
+    (decision)="cancelConfirm($event)"
+  ></app-confirm-dialog>
+    
+    <!-- Success Message Component -->
+    <appdoc-success-message 
+      *ngIf="showSuccessMessage"
+      [message]="successFileCount + ' document(s) shared with ' + firmName + ' successfully.'"
+      (close)="closeSuccessMessage()"
+    ></appdoc-success-message>
+
+
+
+    <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" 
+    type="ball-clip-rotate" [fullScreen]="true">
+    </ngx-spinner>

@@ -1,0 +1,13 @@
+<!-- confirm-dialog.component.html -->
+<div class="dialog-overlay">
+    <div class="dialog-box">
+      <div class="dialog-content">
+        <h3>{{ title }}</h3>
+        <p>{{ message }}</p>
+      </div>
+      <div class="dialog-actions">
+        <button class="cancel-btn" (click)="cancel()">No</button>
+        <button class="confirm-btn" (click)="confirm()">Yes</button>
+      </div>
+    </div>
+  </div>

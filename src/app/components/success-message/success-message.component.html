@@ -1,0 +1,59 @@
+<!-- src/app/components/success-message/success-message.component.html -->
+<div class="split-layout">
+    <!-- Left side with blue background and text -->
+    <div class="left-panel">
+      <div class="content">
+        <h1>Find the Lawyer</h1>
+        <p>Thank you for your inquiry</p>
+      </div>
+    </div>
+    
+    <!-- Right side with success message -->
+    <div class="right-panel">
+      <div class="success-container">
+        <div class="success-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+        </div>
+        
+        <h2>Your inquiry has been submitted!</h2>
+        <p class="success-message">Thank you for reaching out. Our Team will get in touch with you at the earliest.</p>
+        
+        <!-- <div class="inquiry-details">
+          <h3>Inquiry Details</h3>
+          <div class="detail-item">
+            <span class="label">Name:</span>
+            <span class="value">{{formData.name}}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Email:</span>
+            <span class="value">{{formData.email}}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Issue Type:</span>
+            <span class="value">
+              {{formData.selectedIssues && formData.selectedIssues.length ? formData.selectedIssues.join(', ') : formData.issueType || 'Not specified'}}
+              <span *ngIf="formData.otherIssueDetails">: {{formData.otherIssueDetails}}</span>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Practice Area:</span>
+            <span class="value">{{formData.practiceArea}}</span>
+          </div>
+        </div> -->
+        
+        <div class="next-steps">
+          <h3>What's Next?</h3>
+          <p>Our team of experts will review your query and provide you with a list of tailored recommendations best suited to your needs.</p>
+        </div>
+        
+        <div class="button-container">
+          <button class="btn btn-primary" (click)="startNewInquiry()">
+            Start New Inquiry
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

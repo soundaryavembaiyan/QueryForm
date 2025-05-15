@@ -1,0 +1,17 @@
+<!-- src/app/pages/home/home.component.html -->
+<div class="split-layout">
+    <!-- Left side with blue background and text -->
+    <div class="left-panel">
+      <div class="content">
+        <h1>Find the Lawyer</h1>
+        <p>Scan the QR code to get started with your legal inquiry</p>
+      </div>
+    </div>
+    
+    <!-- Right side with QR scanner -->
+    <div class="right-panel">
+      <div class="qr-container">
+        <app-qr-scanner (scanComplete)="onQrCodeScanned()"></app-qr-scanner>
+      </div>
+    </div>
+  </div>
